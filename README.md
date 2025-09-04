@@ -1,6 +1,6 @@
 # Detect inactivity and stop media players
 
-The scripts in this repo were created with one goal:
+The scripts in this repo were created with one goal in mind:
 - To detect user inactivity and pause all media players in the background until the user gets back.
 - When the user returns to the computer, all players that were running before, but then got paused, will resume.
 
