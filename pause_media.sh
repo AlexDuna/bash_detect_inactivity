@@ -1,26 +1,23 @@
 #!/bin/bash
 
-# Install playerctl if not installed
+TO_RESTART=()
 
-
-# Check if any media players are active
-
-MEDIAS=$(playerctl -l 2>&1)
-TO_RESTART=""
+# Check for any active media players
+MEDIAS=$(playerctl -l)
 
 if [[ -z "$MEDIAS" ]] || [[ "$MEDIAS" == "No players found" ]]; then
   echo "Haven't found any players."
-  exit 1
+  exit 0
 else
   for media in $MEDIAS
   do
 
     # Check if any player is playing
 
-    STATUS=$(playerctl --player=$media status)
+    STATUS=$(playerctl --player=$media status 2>/dev/null)
     if [[ -n $STATUS ]]; then
       if [ "$STATUS" == "Playing" ]; then
-        TO_RESTART+="$media "
+        TO_RESTART+="$media "                  # keep currently playing media in mind, when user returns, resume it
         playerctl --player=$media pause
       elif [ "$STATUS" == "Paused" ]; then
         continue
@@ -29,11 +26,4 @@ else
   done
 fi
 
-for i in $TO_RESTART
-do
-  echo "$i"
-done
-
-
-
-exit 0
+echo "${TO_RESTART[@]}" > /tmp/media_to_resume

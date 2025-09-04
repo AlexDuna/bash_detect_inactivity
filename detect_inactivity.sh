@@ -1,6 +1,10 @@
 #!/bin/bash
 
-/usr/bin/swayidle -w \
-    timeout 480 "/usr/bin/kitty --class cmatrix-saver -e /usr/bin/cmatrix" \
-    resume ""  
+# Install swayidle if needed
 
+while true; do
+    /usr/bin/swayidle -w \
+        timeout 300 "/home/alexduna7/GitHub/bash_detect_inactivity/pause_media.sh" \
+        resume "/home/alexduna7/GitHub/bash_detect_inactivity/resume_media.sh"  
+    sleep 1
+done
