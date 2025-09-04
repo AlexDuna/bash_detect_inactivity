@@ -6,8 +6,8 @@ The scripts in this repo were created with one goal in mind:
 
 ## Development
 I used an interesting command-line utility and library for controlling media players named **Playerctl**.
-```Playerctl``` work on media players that implement the [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) D-Bus Interface SPecification.
-- **MPRIS** - Media Player Remote Interfacing Specification is a standard [D-BUS](https://www.freedesktop.org/wiki/Software/dbus/) interface which aims to provide a common programmatic API for controlling media players. Most modern browsers, music apps, such as Spotify, and others are using this interface.\
+```Playerctl``` works on media players that implement the [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) D-Bus Interface Specification.
+- **MPRIS** - Media Player Remote Interfacing Specification is a standard [D-BUS](https://www.freedesktop.org/wiki/Software/dbus/) interface which aims to provide a common programmatic API for controlling media players. Most modern browsers, music apps, such as Spotify, and others are using this interface.
 
 Playerctl comes with a daemon that allows it to act on the currently active media player called ```playerctld```.
 This library offers a wide range of commands and options to be used, so more details can be found here: [playerctl](https://github.com/altdesktop/playerctl).
@@ -16,13 +16,13 @@ This library offers a wide range of commands and options to be used, so more det
 
 ### pause_media.sh
 ```pause_media.sh``` script checks if there are any active media players running on your computer. If there are, we save them in a ```MEDIAS``` list.
-- After checking the list not to be empty, we go through every media device that is active with a "Playing" status, save it for later in a ```TO_RESTART``` list, and pause it.
+- After checking the list to not be empty, we go through every media device that is active, and check for "Playing" status. Save it for later in a ```TO_RESTART``` list, and pause it.
 - We pass the contents of ```TO_RESTART``` list to a ```/tmp/media_to_resume``` temporary file.
 - This will be the first step, after the user idles and is detected as inactive.
 
 ### resume_media.sh
-```resume_media.sh``` script checks if the ```/tmp/media_to_resume``` exists, and then reads the content of the file into the ```TO_RESTART``` list variable.
-- We then go through the list and resume all media players, and then delete the files.
+```resume_media.sh``` script checks if the ```/tmp/media_to_resume``` exists, and then reads the contents of the file into the ```TO_RESTART``` list variable.
+- We then go through the list and resume all media players, (basically set their status from "Paused" to "Playing"), and then delete the file.
 - This step will take place after the user returns from being AFK.
 
 ### detect_inactivity.sh
