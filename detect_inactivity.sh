@@ -26,7 +26,7 @@ while true; do
   if [[ $DISPLAY_PROTOCOL == "wayland" ]]; then
     swayidle_path=$(which swayidle)
     $swayidle_path -w \
-        timeout 10 "$PAUSE_SCRIPT" \
+        timeout $IDLE_THRESHOLD "$PAUSE_SCRIPT" \
         resume "$RESUME_SCRIPT"  
     sleep 1
   elif [[ $DISPLAY_PROTOCOL == "x11" ]]; then
