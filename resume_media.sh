@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ -f /tmp/media_to_resume ]];then
   read -r -a TO_RESTART < /tmp/media_to_resume
